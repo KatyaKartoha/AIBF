@@ -2,6 +2,8 @@ import telebot
 from logic import *
 from config import *
 
+import os
+
 bot = telebot.TeleBot(API_TOKEN)
 
 
@@ -30,6 +32,10 @@ def echo_message(message):
     api.convert_to_image(images, path)
     photo = open(path, 'rb')
     bot.send_photo(message.chat.id, photo)
+
+    try:
+        os.remove(path)
+    except: pass
 
 
 bot.infinity_polling()
